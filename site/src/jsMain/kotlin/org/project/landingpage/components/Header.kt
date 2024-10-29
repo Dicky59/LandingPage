@@ -24,11 +24,11 @@ import org.project.landingpage.util.Constants.FONT_FAMILY
 import org.project.landingpage.util.Res
 
 @Composable
-fun Header() {
+fun Header(onMenuClicked: () -> Unit) {
     val breakpoint = rememberBreakpoint()
     Row(
         modifier = Modifier
-            .fillMaxWidth(80.percent)
+            .fillMaxWidth(if (breakpoint > Breakpoint.MD) 80.percent else 90.percent)
             .margin(topBottom = 50.px),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
@@ -43,8 +43,8 @@ fun Header() {
 
 @Composable
 fun LeftSide(breakpoint: Breakpoint) {
-    Row {
-        if(breakpoint < Breakpoint.MD) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        if(breakpoint <= Breakpoint.MD) {
             FaBars(
                 modifier = Modifier.margin(right = 15.px)
             )
